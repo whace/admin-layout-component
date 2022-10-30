@@ -9,7 +9,15 @@ import DefineOptions from 'unplugin-vue-define-options/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), DefineOptions(), AutoImport(), dts({
+  plugins: [vue(), vueJsx(), DefineOptions(), AutoImport({
+    include: [
+      /\.[tj]sx?$/,
+      /\.vue$/,
+    ],
+    imports: [
+      'vue',
+    ],
+  }), dts({
     include: ['./src/index.ts', './src/index.vue'],
     beforeWriteFile(filePath, content) {
       return {
